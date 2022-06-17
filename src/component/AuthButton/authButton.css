@@ -1,0 +1,35 @@
+.auth-button {
+    width: 100%;
+    padding: 10px;
+    background: #68C3DB;
+    color: white;
+    border:none;
+    outline: none;
+    border-radius: 20px;
+    font-size: 18px;
+    margin-top: 10px;
+    transition: .5s;
+    cursor: pointer;
+}
+.auth-button_back{
+    background: white;
+    border:1px solid #68C3DB;
+    color: #68C3DB;
+    transition: .5s;
+    outline: none;
+    border-radius: 20px;
+    font-size: 18px;
+    margin-top: 10px;
+    transition: .5s;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px;
+}
+.auth-button:hover{
+    background: #559eb3;
+}
+.auth-button_back:hover{
+    background: #d4e6f8;
+   
+    
+}

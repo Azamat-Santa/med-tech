@@ -1,0 +1,60 @@
+.calendar-month{
+    background: white;
+    width: 700px;
+    padding: 10px;
+    border-radius:20px;
+    margin: 50px auto;
+}
+.calendar-month_grid{
+    display: grid;
+    grid-template-columns: repeat(7,100px);
+  width: 700px;
+}
+.calendar-month_header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 630px;
+    margin: 10px auto 20px 35px;
+}
+
+
+.calendar-month__day{
+    display: flex;
+    flex-direction: column;
+}
+.calendar-month__notCurent-month,
+.calendar-month__day,
+.calendar-month__current-day{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    margin: 5px 0 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+.calendar-month__current-day{
+    color: white;
+    background: #DD7700;
+    border-radius: 13px;
+    width: 25px;
+    height: 25px;
+}
+.calendar-month__notCurent-month{
+    color:grey;
+}
+.monthHandler{
+    transform: rotate(180deg);
+}
+.calendar-month__isEntrie{
+    width: 6px;
+    height: 6px;
+    border-radius:3px;
+    background: rgb(18, 81, 168);
+}
+.calendar-month__month{
+    font-size: 20px;
+    font-weight: 500;
+} 
+

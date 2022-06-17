@@ -1,0 +1,36 @@
+/* modal */
+
+.calendar__modal-wrapper{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.427);
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar__modal-content{
+    width: 30%;
+    min-height: 100px;
+    padding: 10px;
+    border-radius:10px;
+    background: white;
+    color:black;
+}
+.calendar__modal-wrapper_none{
+    display: none;
+}
+.calendar-modal__time{
+    color:#DD7700;
+    margin-bottom: 5px;
+}
+.calendar-modal__name{
+    margin-bottom: 5px;
+
+}
+.calendar-modal__not-entries{
+    font-size: 20px;
+    font-weight: bold;
+} 

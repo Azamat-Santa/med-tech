@@ -1,0 +1,54 @@
+.auth__form-wrapper {
+    width: 436px;
+    height: 80%;
+    background: #5AC3E1;
+    position: absolute;
+    z-index: 5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50px;
+}
+
+.auth__form-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 18%;
+
+}
+
+.logo-title {
+    font-family: 'Pacifico';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    color: white;
+    margin-left: 10px;
+}
+
+.auth__form {
+    height: 62%;
+    width: 100%;
+    background: white;
+    position: fixed;
+    bottom: 0;
+    border-radius: 50px;
+    font-family: 'Jost', sans-serif;
+    font-size: 20px;
+    padding: 0 70px;
+    box-sizing: border-box;
+}
+
+
+.auth__form-input p {
+    color: #008CB5;
+}
+
+.auth__form a {
+    color: #008CB5;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    display: block;
+}

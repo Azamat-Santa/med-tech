@@ -1,0 +1,53 @@
+.header {
+    height: 20vh;
+    width: 100%;
+    background-image: url('../../img/headerBg.png');
+    background-position: 100% 100%;
+    background-size: 100% 100%;
+    
+}
+.header__content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    height: 40%;
+    width: 95%;
+    margin: 0 auto;
+}
+.header_logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header_logo-title {
+    font-family: 'Pacifico';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    color: #00B1E5;
+    margin-left: 10px;
+}
+.header__nav {
+    list-style-type: none;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.account{
+    display: flex;
+    align-items: center;
+}
+.account img {
+    margin-left: 15px;
+}
+.active-page{
+    color: #4BC5EB;
+}
+.page-link{
+    color:#008CB5;
+    
+}

@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import Calendar from "./component/Calendar/Calendar";
+import { Route, Routes } from "react-router-dom";
+import Authorization from "./pages/Authorization/Authorization";
+import PasswordRecovery from "./pages/PasswordRecovery/PasswordRecovery";
+import Home from "./pages/Home/Home";
+import { useState } from "react";
+import Header from "./component/Header/Header";
+import CheckList from "./pages/CheckList/CheckList";
+import Statistics from './pages/Statistics/Statistics';
 
 function App() {
+  const isSavedUser = localStorage.getItem('isAuth')
+  const [isAuth, setIsAuth] = useState(isSavedUser);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {isAuth ? (
+        <div>
+          <Header/>
+           <Routes>
+             <Route exact path="/" element={<Home />} />
+             <Route exact path="/checkList" element={<CheckList />} />
+             <Route exact path="/statistics" element={<Statistics />} />
+           </Routes>
+        </div>
+        
+      ) : (
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={<Authorization isAuth={isAuth} setIsAuth={setIsAuth} />}
+          />
+          <Route
+            exact
+            path="/passwordRecovery"
+            element={<PasswordRecovery />}
+          />
+        </Routes>
+      )}
     </div>
   );
 }
