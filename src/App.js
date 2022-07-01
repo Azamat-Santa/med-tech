@@ -9,6 +9,7 @@ import { useState } from "react";
 import Header from "./component/Header/Header";
 import CheckList from "./pages/CheckList/CheckList";
 import Statistics from './pages/Statistics/Statistics';
+import Register from './Test/Register';
 
 function App() {
   const isSavedUser = localStorage.getItem('isAuth')
@@ -37,6 +38,11 @@ function App() {
             exact
             path="/passwordRecovery"
             element={<PasswordRecovery />}
+          />
+            <Route
+            exact
+            path="/register"
+            element={<Register />}
           />
         </Routes>
       )}

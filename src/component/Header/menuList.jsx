@@ -4,10 +4,6 @@ export const menu = [
       path: "/",
     },
     {
-      text: "Чеклист",
-      path: "/checkList",
-    },
-    {
       text: "Статистика",
       path: "/statistics",
     }

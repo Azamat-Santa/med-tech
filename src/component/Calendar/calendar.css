@@ -1,14 +1,14 @@
 .calendar-month{
     background: white;
-    width: 700px;
-    padding: 10px;
+    width: 100%;
     border-radius:20px;
-    margin: 50px auto;
 }
 .calendar-month_grid{
     display: grid;
-    grid-template-columns: repeat(7,100px);
-  width: 700px;
+    grid-template-columns: repeat(7,1fr);
+    grid-gap: 0.9px;
+    background: #E0E0E0;
+    border: 1px solid #E0E0E0;
 }
 .calendar-month_header{
     display: flex;
@@ -20,26 +20,35 @@
 
 
 .calendar-month__day{
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
 }
 .calendar-month__notCurent-month,
 .calendar-month__day,
 .calendar-month__current-day{
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
     padding: 3px;
-    margin: 5px 0 5px 0;
+    padding: 10px 0 0 10px;
     cursor: pointer;
     font-size: 20px;
+    height: 78px;
+   
+    background: white;
 }
 .calendar-month__current-day{
-    color: white;
-    background: #DD7700;
-    border-radius: 13px;
-    width: 25px;
-    height: 25px;
+    background: #CAE8F4;
+
+}
+.calendar-month__day_wrapper{
+    display: flex;
+    width: 100%;
+    color: #5AC3E1;
+    font-weight: 600;
+font-size: 23px;
+justify-content: space-around;
+margin: 20px 0px;
 }
 .calendar-month__notCurent-month{
     color:grey;
@@ -57,4 +66,6 @@
     font-size: 20px;
     font-weight: 500;
 } 
+.calendar-month__days-week{
 
+}

@@ -84,9 +84,12 @@ border-bottom: 1px solid #DFDFDF;
     border-radius: 3px;
     left: 10px;
 }
-.calendar-week,
-.calendar-month{
+.calendar-week{
     font-size: 50px;
     text-align: center;
     margin-top: 50px;
+}
+.calendar-navigate-left{
+    color: #5AC3E1;
+    
 }
