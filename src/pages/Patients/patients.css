@@ -1,0 +1,88 @@
+
+.patientsFilter{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+
+.status-select{
+    width: 127px;
+    height: 38px;
+   border-radius: 20px;
+   padding: 5px 10px;
+   border: 1px solid #A9A9A9;
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   position: relative;
+}
+.status-select__wrapper{
+    transition: .5s;
+    width: 127px;
+    box-shadow: 0px 2px 14px 0px #00000040;
+    border-radius:5px;
+    margin-top: 10px;
+    position: absolute;
+    background: white;
+
+}
+.status-select__item{
+    cursor: pointer;
+    padding: 7px 5px;
+}
+.status-select__item_active{
+    background: #EDF3FB;
+
+}
+
+.search-patient {
+    height: 38px;
+    border-radius: 20px;
+   border: 1px solid #A9A9A9;
+padding: 0 5px;
+font-size: 16px;
+
+}
+.patient-table {
+    z-index: 4;
+}
+.patient-table__title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    background: #CAE8F4;
+    color:#404040;
+
+}
+.patient-table__columes{
+   display: grid;
+    grid-template-columns: 4% 30% 22% 22% 22%;
+
+}
+.patient-table__columes_item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #5AC3E1;
+    padding: 5px 0;
+
+}
+.patient-table__data_item{
+    display: grid;
+    grid-template-columns: 4% 30% 22% 22% 22%;
+    border:1px solid #DEDEDE;
+    
+}
+.patient-table__data_item div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right:1px solid #DEDEDE;
+    padding: 10px;
+}
+.patient-wrapper{
+    width: 95%;
+    margin: 0 auto;
+}

@@ -1,9 +1,10 @@
 import { useFormik } from "formik";
 import React from "react";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { decrement, increment } from "../redux/reducers/userReducer";
 
 export default function Register() {
-
   const validate = (values) => {
     let errors = {};
     if (!values.firstName) {
@@ -37,45 +38,91 @@ export default function Register() {
   };
   const formik = useFormik({
     initialValues: {
-      firstName:'',
-      lastName:'',
-      email:'',
-      phone:'',
-      birthdayDate:'',
-      experience:'',
-      password:''
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      birthdayDate: "",
+      experience: "",
+      password: "",
     },
     onSubmit: (user) => {
       // const id = user.id
       // dispatch(changeUserAction({id , user}))
-
     },
     validate,
   });
-  const url = 'https://medtechteam2.herokuapp.com/'
-
-  const register = async ()=>{
+ 
+  const url = "https://medtechteam2.herokuapp.com/";
+  // name:'testName',
+  // password:'12345678'
+  const register = async () => {
+    const ref = JSON.parse(localStorage.getItem('doctorTocken')).refreshToken
+    console.log(ref);
     try {
+      // const response = await fetch(
+      //   "https://medtechteam2.herokuapp.com/admin/sign-in",
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       'Content-Type': 'application/json'
+      //     },
+      //     body: JSON.stringify({name:'adminazamat',password:'123456789'}),
+      //   }
+      // );
+      // const data = await response.json()
+      // console.log(response);
+      // console.log(data);
+      // localStorage.setItem('tocken', JSON.stringify(data.refreshToken))
+      // localStorage.setItem('tockenAcs', JSON.stringify(data.accessToken))
+
+      // --------------------------------- oooo --------------------------------- //
+      // const tocken =  localStorage.getItem('tockenAcs')
+      // const response = await fetch(
+      //   "https://medtechteam2.herokuapp.com/doctor/sign-up",
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       Authorization: `Bearer ${tocken}`
+      //     },
+      //     body: JSON.stringify({ 
+      //         "firstName": "тестимя",
+      //         "lastName": "тестфам",
+      //         "birthdayDate": "2022-07-04T04:35:12.462Z",
+      //         "experience": 4,
+      //         "email": "satybaldievazamat08@gmail.com",
+      //         "phone": "+996706530843",
+      //         "password": "123456789"
+      //      }),
+           
+      //   }
+      // );
+      // console.log(response);
+
+
+      // ------------------------------  ----------------------- //
+const tocken =  localStorage.getItem('tocken')
+console.log(tocken);
       const response = await fetch(
-        "https://medtechteam2.herokuapp.com/admin/sign-ap",
+        "https://medtechteam2.herokuapp.com/doctor/refresh",
         {
           method: "POST",
-          body: JSON.stringify(
-            {"name": "Admin",
-             "password": "12345"}),
           headers: {
-            "Content-Type": "application/json;charset=utf-8",
+            'Content-Type': 'application/json',
+            // Authorization: `Bearer ${tocken}`
           },
+          body: JSON.stringify({ 
+            "refreshToken": tocken
+           }),
+           
         }
-      )
-    console.log(response);
+      );
 
     } catch (error) {
       console.log(error);
     }
-    
-}
-  
+  };
   return (
     <div>
       <input type="text" value={formik.firstName} />
@@ -85,7 +132,7 @@ export default function Register() {
       <input type="text" value={formik.birthdayDate} />
       <input type="text" value={formik.experience} />
       <input type="text" value={formik.password} />
-      <button onClick={()=>register()}>click</button>
+      <button onClick={() => register()}>click</button>
     </div>
   );
 }

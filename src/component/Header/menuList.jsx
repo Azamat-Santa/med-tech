@@ -6,5 +6,9 @@ export const menu = [
     {
       text: "Статистика",
       path: "/statistics",
+    },
+    {
+      text: "Патиенты",
+      path: "/patients",
     }
   ];
