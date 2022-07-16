@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./patients.css";
 import statusArrow from "../../img/Polygon 1.png";
 import { columes, patientSaurse } from "./patientData";
+import { Link } from 'react-router-dom';
 export default function Patients() {
   const listStatus = ["Все", "В ожидании", "Родившие", "В архиве"];
   const [status, setStatus] = useState("Статус");
@@ -11,7 +12,8 @@ export default function Patients() {
     setStatus(option);
     setActiveSatus(idx);
   };
-  const statusOptionIsActive = (index) => {
+  const statusOptionIsActive = (e) => {
+    e.stopPropagation()
     setStatusActive(!statusActive);
   };
 
@@ -20,10 +22,10 @@ export default function Patients() {
 
   return (
     <div>
-    <div className="patient-wrapper">
+    <div className="patient-wrapper" onClick={()=>setStatusActive(false)}>
     <div className="patientsFilter" onBlur={() => setStatusActive(false)}>
-        <div>
-          <div className="status-select" onClick={() => statusOptionIsActive()}>
+        <div  className="status-select" onClick={(e) => statusOptionIsActive(e)}>
+          <div className="status-select__header">
             {status}
             <img src={statusArrow} alt="" />
           </div>
@@ -64,7 +66,7 @@ export default function Patients() {
             patientSaurse.map((patient, index)=>(
                 <div className="patient-table__data_item">
                 <div>{index +1 }</div>
-                <div>{patient.name}</div>
+                <Link to='/patientProfile'><div className="patient-table__data_item__name">{patient.name}</div></Link>
                 <div>{patient.pregnancyЫtatus + ' ' + 'беременность'}</div>
                 <div>22.02.22</div>
                 <div>24.06.23</div>

@@ -1,9 +1,11 @@
 /* modal */
 
-.calendar__modal-wrapper{
+.calendar__modal-wrapper {
     position: fixed;
-    width: 100vw;
-    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: rgba(0, 0, 0, 0.427);
     z-index: 2;
     display: flex;
@@ -11,26 +13,102 @@
     align-items: center;
 }
 
-.calendar__modal-content{
+.calendar__modal-content {
     width: 30%;
     min-height: 100px;
-    padding: 10px;
-    border-radius:10px;
     background: white;
-    color:black;
+    color: black;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    height: 519px;
+    overflow: hidden;
+    width: 400px;
+
 }
-.calendar__modal-wrapper_none{
+.calendar__modal-content__form__wrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+}
+
+.calendar__modal-wrapper_none {
     display: none;
 }
-.calendar-modal__time{
-    color:#DD7700;
+
+.calendar-modal__time {
+    color: #DD7700;
     margin-bottom: 5px;
 }
-.calendar-modal__name{
+
+.calendar-modal__name {
     margin-bottom: 5px;
 
 }
-.calendar-modal__not-entries{
+
+.calendar-modal__not-entries {
     font-size: 20px;
     font-weight: bold;
-} 
+}
+.calendar__modal-content__header{
+    background: rgba(202, 232, 244, 1);
+
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgba(90, 195, 225, 1);
+    padding: 0 20px;
+}
+.calendar__modal-content__header img{
+    cursor: pointer;
+}
+.calendar__modal-content__form{
+    width: 80%;
+
+}
+.calendar__modal-content__form__item{
+   display: flex;
+   flex-direction: column;
+}
+.calendar__modal-content__form__item textarea{
+    border: 1px solid rgba(217, 217, 217, 1);
+    resize: none;
+    outline: none;
+    font-size: 15px;
+    padding: 3px;
+}
+.calendar__modal-content__form__item div{
+    margin-bottom: 7px;
+}
+.calendar__modal-content__form__date input{
+    width: 45%;
+    border: 1px solid rgba(217, 217, 217, 1);
+    padding: 5px;
+
+}
+.calendar__modal-content__form__date{
+    display: flex;
+    justify-content: space-between;
+}
+
+.record-select{
+    height: 38px;
+    border-radius: 20px;
+    padding: 5px 10px;
+    border: 1px solid #A9A9A9;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+.record-select__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+

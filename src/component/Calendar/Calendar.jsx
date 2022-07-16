@@ -1,7 +1,7 @@
 import React from "react";
 import "./calendar.css";
 import "moment/locale/ru";
-export default function Calendar({daysMap, isCurrentDay, entries, isSelectedMonth,moment}) {
+export default function Calendar({daysMap, isCurrentDay, entries, isSelectedMonth, moment}) {
   localStorage.setItem('isTocken', false)
   return (
     <div>

@@ -4,14 +4,15 @@ import handlerToday from "../../img/handlerToday.png";
 import { calendarList } from "./calanderList";
 import { dayTimeList } from "./dayTimeList";
 import Calendar from "../../component/Calendar/Calendar";
-import moment from 'moment';
+import moment from "moment";
 import CalendarModal from "../../component/CalendarModal/CalendarModal";
+import edit from "../../img/edit.png";
 export default function Home() {
   const [today, setToday] = useState(moment());
   const [entries, setEntries] = useState([]);
   const [show, setShow] = useState({
     modal: false,
-    pacient: [],
+    pacient: {},
   });
   const [calendarNavigate, setCalendarNavigate] = useState({
     day: true,
@@ -33,8 +34,6 @@ export default function Home() {
   const startDayQuery = startDay.clone().format("X");
   const endDayQuery = startDay.clone().add(42, "days").format("X");
 
-  
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -44,9 +43,10 @@ export default function Home() {
   const prevHandler = () =>
     setToday((prev) => prev.clone().subtract(1, "month"));
   const nextHandler = () => setToday((prev) => prev.clone().add(1, "month"));
-  const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+  const capitalizeFirstLetter = (string) =>
+    string.charAt(0).toUpperCase() + string.slice(1);
 
-  const showModal = (day, copyEntrie) => {
+  const showModal = (copyEntrie) => {
     setShow({
       modal: true,
       pacient: copyEntrie,
@@ -76,25 +76,15 @@ export default function Home() {
       });
     }
   };
-  const enrieOne = 3;
-  const enrieTwo = 5;
 
   return (
     <div className="home">
-      <CalendarModal day={day} show={show} setShow={setShow} />
+      <CalendarModal show={show} setShow={setShow} />
 
       <div className="calendar">
         <div className="calendar__wrapper">
           <div className="calendar-navigate">
             <div className="calendar-navigate-left">
-              <img src={handlerToday} alt="" className="navigate__img_left" />
-              Сегодня
-              <img src={handlerToday} alt="" className="navigate__img_right" />
-            </div>
-            <div className="calendar-navigate_middle">
-              Июнь 18, 2022 Пятница
-            </div>
-            <div className="calendar-navigate_right">
               <div className="calendar-navigate_right-wrapper">
                 {calendarList.map((toggle, index) => (
                   <div
@@ -110,25 +100,59 @@ export default function Home() {
                   </div>
                 ))}
               </div>
+              <div>
+                <img src={handlerToday} alt="" className="navigate__img_left" 
+                  onClick={prevHandler}
+                />
+                {calendarNavigate.month ? today.format('MMMM'):'Сегодня'}
+                <img
+                  src={handlerToday}
+                  alt=""
+                  className="navigate__img_right"
+                  onClick={nextHandler}
+
+                />
+              </div>
             </div>
+            <div className="calendar-navigate_middle">
+            {`${today.format('MMMM')} ${today.format('DD')} ${today.format('YYYY')} ${today.format('dddd')}`}
+            </div>
+            <div className="calendar-navigate_right" onClick={() => showModal()}>+ Добавить запись</div>
           </div>
           {calendarNavigate.day ? (
             <div className="calendar-day">
-              {dayTimeList.map((time, index) => (
-                <div className="calendar-day__item" key={index}>
-                  <div className="calendar-day__item-time">{time}</div>
-                  {enrieOne === index || enrieTwo === index ? (
-                    <div className="calendar-day__item-entrie">
-                      Гульмира Атаханова (Неделя 35)
-                    </div>
-                  ) : (
-                    <div className="calendar-day__item-name"></div>
-                  )}
+              {dayTimeList.map((patient, index) => (
+                <div
+                  className={
+                    patient.type === "свободно"
+                      ? "calendar-day__item calendar-day__item_free"
+                      : patient.type === "осмотр"
+                      ? "calendar-day__item calendar-day__item_inspection"
+                      : patient.type === "занят"
+                      ? "calendar-day__item calendar-day__item_busy"
+                      : "calendar-day__item calendar-day__item_meeting"
+                  }
+                  key={index}
+                >
+                  <div className="calendar-day__item-time">{patient.time}</div>
+                  <div className="calendar-day__item_right">
+                    <div> {patient.name}</div>
+                    {patient.type === "осмотр" ? (
+                      <div
+                        className="calendar-day__item_edit"
+                      >
+                        <img src={edit} alt="" />
+                        Редактировать
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
           ) : calendarNavigate.month ? (
-            <Calendar 
+            <Calendar
               daysMap={daysMap}
               isCurrentDay={isCurrentDay}
               entries={entries}
@@ -136,6 +160,17 @@ export default function Home() {
               moment={moment}
             />
           ) : null}
+          <div className="calendar__footer">
+            <div className="calendar__footer__left">
+            Записи
+            </div>
+            <div className="calendar__footer__middle">
+            Собрание
+            </div>
+            <div className="calendar__footer__right">
+            Занят/Выходной день
+            </div>
+          </div>
         </div>
       </div>
     </div>

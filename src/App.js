@@ -11,6 +11,8 @@ import CheckList from "./pages/CheckList/CheckList";
 import Statistics from './pages/Statistics/Statistics';
 import Register from './Test/Register';
 import Patients from "./pages/Patients/Patients";
+import CalendarModal from "./component/CalendarModal/CalendarModal";
+import PatientProfile from "./pages/PatientProfile/PatientProfile";
 
 function App() {
   const isSavedUser = localStorage.getItem('isAuth')
@@ -21,11 +23,14 @@ function App() {
       {isAuth ? (
         <div>
           <Header/>
+          <CalendarModal/>
            <Routes>
              <Route exact path="/" element={<Home />} />
              <Route exact path="/checkList" element={<CheckList />} />
              <Route exact path="/statistics" element={<Statistics />} />
              <Route exact path="/patients" element={<Patients />} />
+             <Route exact path="/register" element={<Register />} />
+             <Route exact path="/patientProfile" element={<PatientProfile />} />
              
            </Routes>
         </div>

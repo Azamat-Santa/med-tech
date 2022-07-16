@@ -62,7 +62,7 @@ export default function PasswordRecovery(props) {
           <Title text="Восстановление пароля" />
           <p className="password-recovery-p_bold">Получите код подтверждения</p>
           <p className="password-recovery-p_not-bold">
-            Мы отправили код подтверждения на адрес ******@ma**.**
+            Мы отправили код подтверждения на адрес satybaldiev@gmail.com
           </p>
           <p>Введите код подтверждения</p>
           <div className="confirmation-code">

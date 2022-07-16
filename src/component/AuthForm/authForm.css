@@ -52,3 +52,15 @@
     margin-top: 10px;
     display: block;
 }
+.auth__form-input__show-password__wrapper{
+    position: relative;
+}
+.auth__form-input__show-password{
+width: 20px;
+height: 20px;
+position: absolute;
+top: 30%;
+left: 90%;
+background: url('../../img/isShowPassword.png');
+cursor: pointer;
+}
