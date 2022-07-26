@@ -64,3 +64,7 @@ left: 90%;
 background: url('../../img/isShowPassword.png');
 cursor: pointer;
 }
+.validate-error{
+    color: red;
+    font-size: 15px;
+}

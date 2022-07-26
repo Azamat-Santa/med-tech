@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./patients.css";
 import statusArrow from "../../img/Polygon 1.png";
 import { columes, patientSaurse } from "./patientData";
 import { Link } from 'react-router-dom';
+import { getPatients } from './../../api/doctor/AuthDoctor';
 export default function Patients() {
+  useEffect(() => {
+    getPatients()
+  }, [])
   const listStatus = ["Все", "В ожидании", "Родившие", "В архиве"];
   const [status, setStatus] = useState("Статус");
   const [statusActive, setStatusActive] = useState(false);
@@ -16,9 +20,9 @@ export default function Patients() {
     e.stopPropagation()
     setStatusActive(!statusActive);
   };
+  localStorage.getItem('doctorTocken')
+  console.log();
 
-
-  
 
   return (
     <div>

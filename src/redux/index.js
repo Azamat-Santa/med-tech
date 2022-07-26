@@ -1,9 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import  coutSlice  from "./reducers/userReducer";
+import  doctorSlice  from "./reducers/userReducer";
 
 
 const rootReducer = combineReducers({
-    count:coutSlice
+    doctor:doctorSlice
 })
 
 export const store = configureStore({

@@ -1,19 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit';
 
- const coutSlice = createSlice({
- name:'count',
+ export const doctorSlice = createSlice({
+ name:'authDoctor',
  initialState:{
-    count:0
+    isAuth:localStorage.getItem('isAuth'),
+    isLoading:false,
+    isError:'',
+    response:{}
  },
  reducers:{
-    increment(state){
-        state.count = state.count + 1 
+    authDoctorRequest(state ,action){
+        // console.log(action);
+        state.isLoading = true
+        state.isError=''
+
+     },
+    authDoctorSuccess(state ,action){
+    //    console.log(action);
+       state.isError=''
+       state.isLoading = false
+       state.isAuth = true
+       state.response = action.payload
     },
-    decrement(state){
-        state.count = state.count - 1 
+    authDoctorFailure(state,action){
+        // console.log(action.payload);
+        state.isError=action.payload
     },
+    
+
  }
 })
 
-export default coutSlice.reducer
-export const {increment, decrement} = coutSlice.actions
+export default doctorSlice.reducer
+export const {authDoctorRequest, authDoctorSuccess,authDoctorFailure} = doctorSlice.actions

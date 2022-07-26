@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import "./patientProfile.css";
 import download from "../../img/download.png";
 import avatar from "../../img/avatarPatient.png";
-import PatientProfileTable from './../../component/PtientProfileTable/PatientProfileTable';
-import AuthButton from './../../component/AuthButton/AuthButton';
+import PatientProfileTable from "./../../component/PtientProfileTable/PatientProfileTable";
+import AuthButton from "./../../component/AuthButton/AuthButton";
 import { checkList } from "../../component/PtientProfileTable/checklList";
+import MedFile from "../../component/MedFile/MedFile";
 export default function PatientProfile() {
   const [isChecked, setChecked] = React.useState(false);
-  const [activeMonth , setActiveMonth] = useState(2)
+  const [activeMonth, setActiveMonth] = useState(2);
+  const [checkMedFileActive, setCheckMedFileActive] = useState({
+    medFile: true,
+    checkList: false,
+  });
   const toggleCheck = (e) => {
     console.log(e.target.checked);
     setChecked(e.target.checked || !isChecked);
@@ -23,8 +28,18 @@ export default function PatientProfile() {
     "8 месяц",
     "9 месяц",
   ];
+  const handleCheckMed = (value) => {
+    if(value === 'check')setCheckMedFileActive({
+       medFile:false,
+       checkList:true
+     })
 
-  
+     if(value === 'med')setCheckMedFileActive({
+      medFile:true,
+      checkList:false
+     })
+  }
+
   // console.log(checkList);
   return (
     <div className="patient-profile">
@@ -67,8 +82,15 @@ export default function PatientProfile() {
               <h5>БЕРЕМЕННОСТЬ:</h5>
               <p>7 беременность, 24 неделя</p>
             </div>
-            <div className="patient-profile__date__button">Мед. карта</div>
-            <div className="patient-profile__date__button patient-profile__date__button__active">
+            <div 
+            className={checkMedFileActive.medFile? 'patient-profile__date__button patient-profile__date__button__active': 'patient-profile__date__button'}
+            onClick={()=>handleCheckMed('med')}
+            >Мед. карта</div>
+            <div 
+            className={checkMedFileActive.checkList? 'patient-profile__date__button patient-profile__date__button__active': 'patient-profile__date__button'}
+            onClick={()=>handleCheckMed('check')}
+
+            >
               Чек лист
             </div>
           </div>
@@ -80,51 +102,48 @@ export default function PatientProfile() {
                     ? "patient-profile__date__button patient-profile__months__button patient-profile__months__button_active"
                     : "patient-profile__date__button patient-profile__months__button"
                 }
-                onClick={()=>setActiveMonth(index) }
+                onClick={() => setActiveMonth(index)}
               >
                 {month}
               </div>
             ))}
           </div>
         </div>
-        <div className="patient-profile__right">
-          <PatientProfileTable
-            data={checkList.complaints}
-            title="Жалобы"
-          />
-          <PatientProfileTable
-            data={checkList.fetus}
-            title="Плод"
-            text='Беспокоит бессонница'
-          />
-          <PatientProfileTable
-            data={checkList.diagnosis}
-            title="Диагноз"
-          />
-          <PatientProfileTable
-            data={checkList.treatment}
-            title="Лечение"
-          />
-           <PatientProfileTable
-            data={checkList.consulting}
-            title="Консультирование"
-          />
+        {checkMedFileActive.checkList && (
+          <div className="patient-profile__right">
+            <PatientProfileTable data={checkList.complaints} title="Жалобы" />
+            <PatientProfileTable
+              data={checkList.fetus}
+              title="Плод"
+              text="Беспокоит бессонница"
+            />
+            <PatientProfileTable data={checkList.diagnosis} title="Диагноз" />
+            <PatientProfileTable data={checkList.treatment} title="Лечение" />
+            <PatientProfileTable
+              data={checkList.consulting}
+              title="Консультирование"
+            />
 
-          <div className="patient-profile__right__item">
-            <div className="patient-profile__right__item__header">
-               Рекомендации
+            <div className="patient-profile__right__item">
+              <div className="patient-profile__right__item__header">
+                Рекомендации
+              </div>
+              <div className="patient-profile__right__item__rec">
+                У вас уже начался таксикоз? А настроение часто меняется? На этом
+                этапе мамочки часто испытывают тошноту и перемены настроения.
+                Питайтесь часто, но маленькими порциями, и больше отдыхайте.
+              </div>
             </div>
-            <div className="patient-profile__right__item__rec">
-               У вас уже начался таксикоз? А настроение часто меняется? На этом этапе мамочки часто испытывают тошноту и перемены настроения. Питайтесь часто, но маленькими порциями, и больше отдыхайте.
+            <div className="patient-profile__right__btn__wrapper">
+              <div className="patient-profile__right__btn">
+                <AuthButton text="Сохранить" />
+              </div>
             </div>
           </div>
-          <div className="patient-profile__right__btn__wrapper">
-          <div className="patient-profile__right__btn">
-            <AuthButton text='Сохранить'/>
-          </div>
-          </div>
-          
-        </div>
+        )}
+        {
+          checkMedFileActive.medFile && <MedFile />
+        }
       </div>
     </div>
   );

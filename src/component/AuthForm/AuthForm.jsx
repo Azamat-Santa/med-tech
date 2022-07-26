@@ -6,19 +6,25 @@ import Title from "../Title/Title";
 import Input from "../Input/Input";
 import AuthButton from "../AuthButton/AuthButton";
 import { useFormik } from "formik";
+import { authDoctor, AuthDoctor } from "../../api/doctor/AuthDoctor";
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { authDoctorFailure } from "../../redux/reducers/userReducer";
 
-export default function AuthForm({ isAuth, setIsAuth }) {
+export default function AuthForm() {
   const [isShowPassword,setIsShowPassword] = useState(false)
-  const handleAuth = () => {
-    setIsAuth(true);
-    localStorage.setItem("isAuth", true);
-  };
+  const isLoading = useSelector(state=>state.doctor.isLoading)
+  const dispatch = useDispatch()
+ 
   const validate = (values) => {
     let errors = {};
     if (!values.password) {
       errors.password = "Обязательное поле";
-    } else if (values.password.length <= 6 || values.password.length >= 12) {
-      errors.password = "Пароль должно быть больше 6 меньше 12";
+    } else if (values.password.length <= 6 ) {
+      errors.password = "Пароль должен быть не меньше 6";
+    }else if (values.password.length >= 12){
+      errors.password = "Пароль должен быть не больше 12";
+
     }
     if (!values.email) {
       errors.email = "Обязательное поле";
@@ -40,6 +46,9 @@ export default function AuthForm({ isAuth, setIsAuth }) {
     onSubmit: (user) => {},
     validate,
   });
+  const error = useSelector(state => state.doctor.isError)
+  console.log(error);
+  
   return (
     <div className="auth__form-wrapper">
       <div className="auth__form-logo">
@@ -48,9 +57,6 @@ export default function AuthForm({ isAuth, setIsAuth }) {
       </div>
       <div className="auth__form">
         <Title text="Авторизация" />
-        {formik.errors.email && formik.touched.email && (
-          <div style={{ color: "red" }}>{formik.errors.email}</div>
-        )}
         <div className="auth__form-input">
           <Input
             type="text"
@@ -62,12 +68,11 @@ export default function AuthForm({ isAuth, setIsAuth }) {
             value={formik.values.email}
           />
         </div>
-        {formik.errors.password && formik.touched.password && (
-          <div style={{ color: "red" }}>{formik.errors.password}</div>
+        {formik.errors.email && formik.touched.email && (
+          <div className='validate-error'>{formik.errors.email}</div>
         )}
         <div className="auth__form-input auth__form-input__show-password__wrapper">
            <div className="auth__form-input__show-password" onClick={()=>setIsShowPassword(!isShowPassword)}>
-
            </div>
           <Input
             type= {isShowPassword ? 'text' : 'password' }
@@ -79,8 +84,11 @@ export default function AuthForm({ isAuth, setIsAuth }) {
             value={formik.values.password}
           />
         </div>
-        <div onClick={() => handleAuth()}>
-          <AuthButton text="Войти" />
+        {formik.errors.password && formik.touched.password && (
+          <div className='validate-error'>{formik.errors.password}</div>
+        )}
+        <div onClick={() => authDoctor(dispatch,formik.values.email,formik.values.password)}>
+          <AuthButton text="Войти" isLoading={isLoading}/>
         </div>
         <Link to={"/passwordRecovery"}>Забыли пароль?</Link>
       </div>
