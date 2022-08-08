@@ -3,33 +3,38 @@ import { createSlice } from '@reduxjs/toolkit';
  export const doctorSlice = createSlice({
  name:'authDoctor',
  initialState:{
-    isAuth:localStorage.getItem('isAuth'),
+    isAuth:false,
     isLoading:false,
     isError:'',
-    response:{}
  },
  reducers:{
     authDoctorRequest(state ,action){
-        // console.log(action);
         state.isLoading = true
         state.isError=''
-
      },
     authDoctorSuccess(state ,action){
-    //    console.log(action);
        state.isError=''
        state.isLoading = false
        state.isAuth = true
-       state.response = action.payload
+    
     },
     authDoctorFailure(state,action){
-        // console.log(action.payload);
         state.isError=action.payload
     },
-    
-
+    authCheckDoctorRequest(state){
+      state.isAuth = false
+       state.isLoading = true
+    },
+    authCheckDoctorSuccess( state, action){
+       state.isAuth = true
+       state.isLoading = false
+    },
+    authCheckDoctorFailer(state, action){
+      state.isError = action.payload
+    }
  }
 })
 
 export default doctorSlice.reducer
-export const {authDoctorRequest, authDoctorSuccess,authDoctorFailure} = doctorSlice.actions
+export const {authDoctorRequest, authDoctorSuccess,authDoctorFailure,
+   authCheckDoctorRequest,authCheckDoctorSuccess,authCheckDoctorFailer} = doctorSlice.actions

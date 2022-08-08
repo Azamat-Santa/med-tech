@@ -3,16 +3,14 @@ export const BASE_URL = 'https://medtechteam-2.herokuapp.com'
 export const api = axios.create({
     baseURL: BASE_URL,
     headers: {
-        ContentType: 'application/json',
-      }
+        'Content-Type': 'application/json',
+    }
 })
 
 api.interceptors.request.use((config) => {
     if(localStorage.getItem('doctorAccessTocken')){
         const doctorTocken = localStorage.getItem('doctorAccessTocken')
-        console.log(doctorTocken);
-        const test = config.headers.Authorization = `Bearer ${doctorTocken}`
-        console.log(test);
+        config.headers.Authorization = `Bearer ${doctorTocken}`
     } 
     return config;
 })

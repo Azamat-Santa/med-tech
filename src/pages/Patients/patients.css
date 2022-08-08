@@ -100,3 +100,10 @@ width: 300px;
     align-items: center;
     width: 100%;
 }
+.patient-table__data__loading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    border:1px solid #DEDEDE;
+}

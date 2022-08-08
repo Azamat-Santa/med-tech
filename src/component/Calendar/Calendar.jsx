@@ -1,23 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import "./calendar.css";
 import "moment/locale/ru";
-export default function Calendar({daysMap, isCurrentDay, entries, isSelectedMonth, moment}) {
-  localStorage.setItem('isTocken', false)
+import { useSelector } from 'react-redux';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import Spinner from "../Spin/Spinner";
+import { timeConverter } from "../../helpers/timeConverter";
+import PatientListModal from "../PatientListModal/PatientListModal";
+export default function Calendar({daysMap,today, isCurrentDay, appoinment, isSelectedMonth, moment}) {
+  const [appointmentDay , setAppointmentDay] = useState([])
+  const [modalPatientList, setModalPatientList] = useState({
+    modal:false,
+    date:moment()
+  })
+  const isLoading  = useSelector(state => state.appoinment.isLoading)
+  const closeModalPatientList =()=>setModalPatientList({
+    modal:false,
+    date:moment()
+  })
+  
   return (
     <div>
+   <PatientListModal
+    modalPatientList={modalPatientList}
+    closeModalPatientList={closeModalPatientList}
+    appointmentDay={appointmentDay}
+   />
       <div className="calendar-month">
-        {/* <div className="calendar-month_header">
-          <img src={monthHandler} alt="" onClick={prevHandler} />
-          <div className="calendar-month__month">
-            {capitalizeFirstLetter(today.format("MMMM"))} {today.format("YYYY")}
-          </div>
-          <img
-            src={monthHandler}
-            alt=""
-            className="monthHandler"
-            onClick={nextHandler}
-          />
-        </div> */}
         <div className="calendar-month__day_wrapper">
           {[...Array(7)].map((_, i) => {
             return (
@@ -30,25 +39,35 @@ export default function Calendar({daysMap, isCurrentDay, entries, isSelectedMont
             );
           })}
         </div>
-
-        <div className="calendar-month_grid">
+        <div className={true ? 'calendar-month_grid calendar-month_grid__loading' : "calendar-month_grid"} >
+        {isLoading && <div className="calendar-month_grid__wrapper">
+            <Spinner size='44px'/>
+        </div>
+        }
           {daysMap.map((day) => {
             return (
               <>
                 {isCurrentDay(day) ? (
-                  <div className="calendar-month__day calendar-month__current-day">
+                  <div className="calendar-month__day calendar-month__current-day"
+                  onClick={() => {
+                        const copyEntries= appoinment.filter(entrie => entrie.startTime >= day.format("X") && entrie.startTime <= day.clone().endOf("day").format("X"))
+                        setAppointmentDay(copyEntries)
+                        setModalPatientList({
+                          modal:true,
+                          date:day
+                        })
+                      }}
+                  >
                     {day.format("D")}
-                    {entries
+                    {appoinment
                       .filter(
                         (event) =>
-                          event.date >= day.format("X") &&
-                          event.date <= day.clone().endOf("day").format("X")
-                      )
-                      .map((event,index) => (
-                        <div className="calendar-month__isEntrie" key={index}>
-                          {event.title}
+                          event.startTime >= day.format("X") &&
+                          event.startTime <= day.clone().endOf("day").format("X")
+                      ).length !== 0 &&
+                        <div className="calendar-month__isEntrie" >
                         </div>
-                      ))}
+                      }
                   </div>
                 ) : (
                   <div
@@ -57,32 +76,33 @@ export default function Calendar({daysMap, isCurrentDay, entries, isSelectedMont
                         ? "calendar-month__day "
                         : "calendar-month__notCurent-month"
                     }
-                    // onClick={() => {
-                    //     const copyEntries= entries.filter(entrie => entrie.date >= day.format("X") && entrie.date <= day.clone().endOf("day").format("X"))
-                    //     return showModal(day, copyEntries)
-                    //   }}
+                    onClick={() => {
+                        const copyEntries= appoinment.filter(entrie => entrie.startTime >= day.format("X") && entrie.startTime <= day.clone().endOf("day").format("X"))
+                        setAppointmentDay(copyEntries)
+                        setModalPatientList({
+                          modal:true,
+                          date:day
+                        })
+
+                      }}
                   >
                     {day.format("D")}
-                    <div
-                      className={
-                        entries.filter(
-                          (entrie) =>
-                            entrie.date >= day.format("X") &&
-                            entrie.date <= day.clone().endOf("day").format("X")
-                        ).length !== 0
-                          ? "calendar-month__isEntrie"
-                          : ""
+                    {appoinment
+                      .filter(
+                        (event) =>
+                          event.startTime >= day.format("X") &&
+                          event.startTime <= day.clone().endOf("day").format("X")
+                      ).length !== 0 &&
+                        <div className="calendar-month__isEntrie" >
+                        </div>
                       }
-                      // onClick={() => {
-                      //   const copyEntries= entries.filter(entrie => entrie.date >= day.format("X") && entrie.date <= day.clone().endOf("day").format("X"))
-                      //   return showModal(day, copyEntries)
-                      // }}
-                    ></div>
+                   
                   </div>
                 )}
               </>
             );
-          })}
+          })
+          }
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ import { useFormik } from "formik";
 import { authDoctor, AuthDoctor } from "../../api/doctor/AuthDoctor";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { authDoctorFailure } from "../../redux/reducers/userReducer";
+// import { authDoctorFailure } from "../../redux/reducers/doctor";
 
 export default function AuthForm() {
   const [isShowPassword,setIsShowPassword] = useState(false)
@@ -20,7 +20,7 @@ export default function AuthForm() {
     let errors = {};
     if (!values.password) {
       errors.password = "Обязательное поле";
-    } else if (values.password.length <= 6 ) {
+    } else if (values.password.length <= 5 ) {
       errors.password = "Пароль должен быть не меньше 6";
     }else if (values.password.length >= 12){
       errors.password = "Пароль должен быть не больше 12";

@@ -28,7 +28,8 @@ font-weight: 500;
 font-size: 15px;
 }
 .patient-profile__right{
-width: 70%;
+width: 90%;
+margin-right: 10px;
 /* border: 1px solid black; */
 
 }

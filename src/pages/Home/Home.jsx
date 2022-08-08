@@ -7,36 +7,46 @@ import Calendar from "../../component/Calendar/Calendar";
 import moment from "moment";
 import CalendarModal from "../../component/CalendarModal/CalendarModal";
 import edit from "../../img/edit.png";
+import { getAppointmentId } from "../../api/appointment/appointment";
+import { useDispatch, useSelector } from 'react-redux';
+import { getAppointmentAll } from './../../api/appointment/appointment';
+import { getPatient } from "../../api/patient/patient";
 export default function Home() {
   const [today, setToday] = useState(moment());
+  const appoinment = useSelector(state=>state.appoinment.appoinment)
   const [entries, setEntries] = useState([]);
   const [show, setShow] = useState({
     modal: false,
     pacient: {},
   });
   const [calendarNavigate, setCalendarNavigate] = useState({
-    day: true,
-    week: false,
-    month: false,
+    day: false,
+    month: true,
   });
-  const [toggleNavigate, setToggleNavigate] = useState(0);
+  const [dayCalendar, setTodayCalendar] = useState([])
+
   useEffect(() => {
-    fetch(`${url}/entries?date_gte=${startDayQuery}&date_lte=${endDayQuery}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setEntries(res);
-        // console.log(res);
-      });
-  }, [today]);
+     const  copyAppitntment = async () =>{
+      const copy = await appoinment.filter(entrie => entrie.startTime >= today.format("X") 
+      && entrie.startTime <= today.clone().endOf("day").format("X"))
+      setTodayCalendar(copy)
+     }
+     copyAppitntment()
+    
+  }, [])
+  
+  const [toggleNavigate, setToggleNavigate] = useState(0);
+  const dispatch =useDispatch()
+  useEffect(() => {
+    getAppointmentAll(dispatch)
+    getPatient(dispatch)
+  }, [])
+  
+  
   const startDay = today.clone().startOf("month").startOf("week");
   const day = startDay.clone().subtract(1, "day");
-  const url = "http://localhost:3000";
-  const startDayQuery = startDay.clone().format("X");
-  const endDayQuery = startDay.clone().add(42, "days").format("X");
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   const daysMap = [...Array(42)].map(() => day.add(1, "day").clone());
   const isCurrentDay = (day) => moment().isSame(day, "day");
   const isSelectedMonth = (day) => today.isSame(day, "month");
@@ -45,47 +55,37 @@ export default function Home() {
   const nextHandler = () => setToday((prev) => prev.clone().add(1, "month"));
   const capitalizeFirstLetter = (string) =>
     string.charAt(0).toUpperCase() + string.slice(1);
-
   const showModal = (copyEntrie) => {
     setShow({
       modal: true,
       pacient: copyEntrie,
     });
   };
+
+
   const toggleNavigateDays = (index, handlerCalendar) => {
     setToggleNavigate(index);
     if (handlerCalendar === "День") {
       setCalendarNavigate({
         day: true,
-        week: false,
-        month: false,
-      });
-    }
-    if (handlerCalendar === "Неделя") {
-      setCalendarNavigate({
-        day: false,
-        week: true,
         month: false,
       });
     }
     if (handlerCalendar === "Месяц") {
       setCalendarNavigate({
         day: false,
-        week: false,
         month: true,
       });
     }
   };
+ 
 
   return (
     <div className="home">
       <CalendarModal show={show} setShow={setShow} />
-
       <div className="calendar">
         <div className="calendar__wrapper">
-          <div className="calendar-navigate">
-            <div className="calendar-navigate-left">
-              <div className="calendar-navigate_right-wrapper">
+        <div className="calendar-navigate_right-wrapper">
                 {calendarList.map((toggle, index) => (
                   <div
                     className={
@@ -100,8 +100,13 @@ export default function Home() {
                   </div>
                 ))}
               </div>
+          <div className="calendar-navigate">
+            <div className="calendar-navigate-left">
               <div>
-                <img src={handlerToday} alt="" className="navigate__img_left" 
+                <img 
+                src={handlerToday} 
+                alt="" 
+                className="navigate__img_left" 
                   onClick={prevHandler}
                 />
                 {calendarNavigate.month ? today.format('MMMM'):'Сегодня'}
@@ -121,7 +126,8 @@ export default function Home() {
           </div>
           {calendarNavigate.day ? (
             <div className="calendar-day">
-              {dayTimeList.map((patient, index) => (
+              {/* {appoinment && appoinment.length !== 0 && appoinment.filter(entrie => entrie.startTime >= today.format("X") 
+               && entrie.startTime <= today.clone().endOf("day").format("X")).map((patient, index) => (
                 <div
                   className={
                     patient.type === "свободно"
@@ -136,7 +142,7 @@ export default function Home() {
                 >
                   <div className="calendar-day__item-time">{patient.time}</div>
                   <div className="calendar-day__item_right">
-                    <div> {patient.name}</div>
+                    <div> {patient.firstName}</div>
                     {patient.type === "осмотр" ? (
                       <div
                         className="calendar-day__item_edit"
@@ -149,15 +155,16 @@ export default function Home() {
                     )}
                   </div>
                 </div>
-              ))}
+              ))} */}
             </div>
           ) : calendarNavigate.month ? (
             <Calendar
               daysMap={daysMap}
               isCurrentDay={isCurrentDay}
-              entries={entries}
+              appoinment={appoinment}
               isSelectedMonth={isSelectedMonth}
               moment={moment}
+              today={today}
             />
           ) : null}
           <div className="calendar__footer">

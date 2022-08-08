@@ -22,9 +22,8 @@
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     height: 519px;
-    overflow: hidden;
     width: 400px;
-
+    position: relative;
 }
 .calendar__modal-content__form__wrapper{
     width: 100%;
@@ -54,13 +53,14 @@
 }
 .calendar__modal-content__header{
     background: rgba(202, 232, 244, 1);
-
     height: 10%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     color: rgba(90, 195, 225, 1);
     padding: 0 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 .calendar__modal-content__header img{
     cursor: pointer;
@@ -79,19 +79,21 @@
     outline: none;
     font-size: 15px;
     padding: 3px;
+    height: 130px;
 }
 .calendar__modal-content__form__item div{
-    margin-bottom: 7px;
+    /* margin-bottom: 7px; */
 }
 .calendar__modal-content__form__date input{
-    width: 45%;
+    width: 85%;
     border: 1px solid rgba(217, 217, 217, 1);
     padding: 5px;
 
 }
 .calendar__modal-content__form__date{
-    display: flex;
-    justify-content: space-between;
+    
+    /* justify-content: space-between;
+    align-items: center; */
 }
 
 .record-select{
@@ -111,4 +113,43 @@
     align-items: center;
     width: 100%;
 }
+.calendar__modal-content__form__date{
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.calendar__modal__img{
+   position: absolute;
+   top: 8px;
+   left: 110px;
+   cursor: pointer;
+}
+
+/* and design timePicker  */
+
+
+
+.calendar-modal__select__date{
+    position: relative;
+}
+.calendar-modal__select__date__list{
+    position: absolute;
+    background: white;
+}
+.calendar__modal-content__search{
+    position: relative;
+}
+.calendar__modal-content__search__list{
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background: white;
+    box-shadow: 0px 2px 14px 0px #00000040;
+    z-index: 4;
+}
+.calendar__modal-content__search__item{
+    padding: 5px;
+    cursor:pointer;
+}
+
 

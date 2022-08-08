@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./patientProfile.css";
 import download from "../../img/download.png";
 import avatar from "../../img/avatarPatient.png";
@@ -6,13 +6,37 @@ import PatientProfileTable from "./../../component/PtientProfileTable/PatientPro
 import AuthButton from "./../../component/AuthButton/AuthButton";
 import { checkList } from "../../component/PtientProfileTable/checklList";
 import MedFile from "../../component/MedFile/MedFile";
+import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { getPatientId } from "../../api/patient/patient";
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { getCheckListId } from "../../api/checkList/checkList";
 export default function PatientProfile() {
   const [isChecked, setChecked] = React.useState(false);
-  const [activeMonth, setActiveMonth] = useState(2);
+  const [activeMonth, setActiveMonth] = useState(0);
+  const [checkListMonth, setCheckListMonth] = useState(1);
   const [checkMedFileActive, setCheckMedFileActive] = useState({
     medFile: true,
     checkList: false,
   });
+  
+const dispatch = useDispatch()
+
+  const patientId = useParams().patientId;
+ 
+  useEffect(() => {
+    getPatientId( dispatch, patientId)
+  }, [])
+  useEffect(() => {
+    getCheckListId(dispatch, checkListMonth)
+  }, [checkListMonth])
+
+  const patientProfileDate = useSelector(state=>state.patient.patientId.data)
+  console.log(patientId);
+  console.log(patientProfileDate);
+  
+  
   const toggleCheck = (e) => {
     console.log(e.target.checked);
     setChecked(e.target.checked || !isChecked);
@@ -33,12 +57,12 @@ export default function PatientProfile() {
        medFile:false,
        checkList:true
      })
-
      if(value === 'med')setCheckMedFileActive({
       medFile:true,
       checkList:false
      })
   }
+  const agePatient =  parseInt(new Date().getFullYear(),10) - parseInt(patientProfileDate.birthdayDate?.substring(0 , 4),10)
 
   // console.log(checkList);
   return (
@@ -54,33 +78,33 @@ export default function PatientProfile() {
                 <img src={avatar} alt="" />
               </div>
               <div className="patient-profile__avatar__name">
-                Акматова Айнагуль Мамазакировна
+              {patientProfileDate.firstName}  {patientProfileDate.lastName}
               </div>
             </div>
-            <div className="patient-profile__date__inn">
+            {/* <div className="patient-profile__date__inn">
               <h5>ИИН:</h5> 8956686045860
-            </div>
+            </div> */}
             <div className="patient-profile__date__birthday">
               <div>
                 <h5>ДАТА РОЖДЕНИЯ:</h5>
-                <div>21. 09. 1995</div>
+                <div>{patientProfileDate.birthdayDate}</div>
               </div>
               <div>
                 <h5>ВОЗРАСТ:</h5>
-                <div>26 лет</div>
+                <div>{agePatient} лет</div>
               </div>
             </div>
-            <div className="patient-profile__date__item">
+            {/* <div className="patient-profile__date__item">
               <h5>МЕСТО ЖИТЕЛЬСТВО:</h5>
               <p>г.Бишкек</p>
-            </div>
+            </div> */}
             <div className="patient-profile__date__item">
               <h5>ТЕЛЕФОН:</h5>
-              <p>0702 000000</p>
+              <p>{patientProfileDate.phone}</p>
             </div>
             <div className="patient-profile__date__item">
               <h5>БЕРЕМЕННОСТЬ:</h5>
-              <p>7 беременность, 24 неделя</p>
+              <p>{patientProfileDate.weekOfPregnancy}</p>
             </div>
             <div 
             className={checkMedFileActive.medFile? 'patient-profile__date__button patient-profile__date__button__active': 'patient-profile__date__button'}
@@ -97,6 +121,7 @@ export default function PatientProfile() {
           <div className="patient-profile__months">
             {monthList.map((month, index) => (
               <div
+                key={month}
                 className={
                   index === activeMonth
                     ? "patient-profile__date__button patient-profile__months__button patient-profile__months__button_active"
@@ -109,6 +134,7 @@ export default function PatientProfile() {
             ))}
           </div>
         </div>
+
         {checkMedFileActive.checkList && (
           <div className="patient-profile__right">
             <PatientProfileTable data={checkList.complaints} title="Жалобы" />

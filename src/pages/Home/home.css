@@ -32,11 +32,12 @@
     display: flex;
     border-radius: 20px;
     overflow: hidden;
-margin-bottom: 10px;
+    margin-bottom: 10px;
+    width: 156px;
 }
 
 .calendar-navigate_right-wrapper div {
-    padding: 5px 15px;
+    padding: 5px 18px;
     cursor: pointer;
 }
 
@@ -53,6 +54,8 @@ margin-bottom: 10px;
 .calendar-navigate_middle {
     font-size: 24px;
     font-weight: 500;
+    display: flex;
+    align-items: center;
 }
 
 /* calendar-day */
@@ -105,7 +108,6 @@ margin-bottom: 10px;
 .calendar-navigate-left {
     color: #5AC3E1;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 
@@ -186,4 +188,52 @@ cursor:pointer;
     background: rgba(169, 169, 169, 1);
 
 
+}
+
+/* мини календарь */
+
+.mini-calendar{
+    background: white;
+    box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 20px 0px 0px 0px;
+    position: absolute;
+    bottom: -80px;
+    left: 76px;
+    z-index: 2;
+}
+.mini-calendar_grid{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    
+}
+.mini-calendar__day{
+    width:20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    cursor: pointer;
+}
+.mini-calendar__day__out{
+    color: #A9A9A9;
+}
+.mini-calendar__current__day{
+    background: #5AC3E1;
+box-shadow: 0px 2px 8px #C0C0C0;
+color:white;
+}
+.mini-calendar__day_wrapper{
+    display: flex;
+    width: 100%;
+    color: #0086AC;
+    font-weight: 400;
+    font-size: 18px;
+    justify-content: space-around;
+    margin: 20px 0px;
+}
+.mini-calendar__none{
+    display: none;
 }

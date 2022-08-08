@@ -2,7 +2,9 @@
 font-size: 14px;
 width: 90%;
 margin: 0 auto;
-color: #000000;
+color: rgba(0, 0, 0, 1);
+font-weight: 600;
+
 }
 .med-documentation{
     display: flex;
@@ -42,19 +44,236 @@ margin-bottom: 8px;
     font-size: 14px;
     padding: 3px;
     display: block;
+    width: 100%;
 }
 
 
 .med-file__block__one__item{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 14px;
 }
 .med-file__block__one{
 display: flex;
-}
-.med-file__block__one__item__left__two__input{
-    display: flex;
+justify-content: space-between;
 }
 .med-file__block__one__right{
 
+}
+
+.med-file__block__one__item__two{
+    margin-bottom: 14px;
+}
+.med-file__block__one__left{
+    width: 54.5%;
+}
+
+.med-file__block__two__item{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.med-file__block__two__item__left{
+    width: 40%;
+}
+.med-file__block__two__item__right{
+    width: 60%;
+    display: flex;
+}
+.med-file__title{
+    color: #5AC3E1;
+    font-weight: 700;
+    font-size: 16px;
+    margin: 65px 0 65px 0;
+}
+.med-file__block__three__item{
+  display: flex;
+  /* justify-content: space-between; */
+}
+.med-file__block__three__item__left{
+  width: 40%;
+}
+.med-file__block__three__item__right{
+display: flex;
+}
+.med-file__block__three__item__right__family{
+    display: flex;
+    align-items: center;
+}
+.med-file__block__three__item__right__family input{
+    margin-right: 10px;
+}
+.med-file__block__three__item__right__family{
+    margin-right: 70px;
+    margin-bottom: 10px;
+}
+.med-file__block__three__item__right__edu{
+    display: grid;
+    grid-template-columns: 1fr 3fr 3fr;
+    width: 60%;
+}
+.med-file__block__three__item{
+    margin-bottom: 20px;
+}
+.med-file__block__four{
+    display: flex;
+}
+.med-file__block__four__left{
+    width: 40%;
+}
+.med-file__block__four__right{
+    width: 60%;
+}
+
+.med-file__block__five__right{
+    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.med-file__block__five__left{
+    width: 40%;
+
+}
+.med-file__block__five__right{
+    width: 60%;
+}
+.med-file__block__five__right__right input,
+.med-file__block__five__right__left input{
+margin-left: 10px;
+}
+.med-file__block{
+    display: flex;
+    margin-bottom: 20px;
+}
+.med-file__block__left{
+width: 40%;
+}
+.med-file__block__right{
+    width: 60%;
+    display: flex;
+}
+.med-file__lament__textarea{
+    width: 100%;
+    border: 1px solid rgba(191, 191, 191, 1);
+    border-radius:3px;
+    resize: none;
+    outline: none;
+    padding: 5px;
+}
+.med-file__anemnez__title{
+    font-weight: 600;
+    font-size: 16px;
+    margin: 10px 0 10px 0;
+}
+.past-illnesses-title{
+    margin-bottom: 20px;
+}
+.past-illnesses-title span{
+    color:red;
+}
+
+.med-file__pregnancy__table__title__item{
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr 3fr 2fr;
+    border-bottom: 1px solid rgba(169, 169, 169, 1);
+
+}
+.med-file__pregnancy__table__title__item div{
+    border-right: 1px solid rgba(169, 169, 169, 1);
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.med-file__pregnancy__table__title{
+    border: 1px solid rgba(169, 169, 169, 1);
+}
+
+/* modal */
+.modal-pregnansy-wrapper{
+ width: 100vw;
+ height: 100vh;
+ position: fixed;
+ top: 0;
+ left: 0;
+ bottom: 0;
+ right: 0;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+background: rgba(170, 167, 167, 0.659);
+}
+.modal-pregnansy-content{
+    width: 50%;
+
+}
+.modal-pregnansy__header{
+    height: 10%;
+    background: #5AC3E1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    font-weight: 700;
+    font-size: 32px;
+    position: relative;
+    padding: 10px 0 10px 0;
+}
+.modal-pregnansy__header img{
+    position: absolute;
+    top: 40%;
+    right: 10px;
+    cursor: pointer;
+}
+.modal-pregnansy-content__wrapper{
+    background: white;
+    padding:40px 69px 34px 69px;
+}
+.modal-pregnansy__block{
+    display: flex;
+    display: grid;
+    grid-template-columns: 3fr 9fr;
+    margin-bottom: 30px;
+}
+.modal-pregnansy__block__two{
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+}
+.modal-pregnansy__input{
+    width: 20%;
+    margin-right: 20px;
+}
+.modal-pregnansy__block__right__flex{
+display: flex;
+align-items: center;
+}
+.modal-pregnansy__btn{
+    width: 30%;
+    margin-left: auto;
+    margin-right: 0;
+}
+.modal-pregnansy-wrapper_none{
+    display: none;
+}
+
+/* modal end */
+
+.med-file__block__first-examination{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.med-file__block__first-examination div{
+display: flex;
+align-items: center;
+width: 50%;
+}
+.med-file__block__first-examination p{
+    width: 70%;
+}
+.med-file__block__IMT{
+    display: flex;
+    align-items: center;
+
+}
+.med-file__block__IMT__border{
+    border-bottom: 1px solid #000;
 }
