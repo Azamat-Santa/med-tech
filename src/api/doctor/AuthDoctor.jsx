@@ -25,11 +25,14 @@ export const AuthDoctor = {
 };
 
 export const authDoctor = async (dispatch, email, password) => {
+  
   try {
     dispatch(authDoctorRequest());
     const request = await AuthDoctor.login(email, password);
     dispatch(authDoctorSuccess(request.data));
     if (request.status === 201) {
+      const decode = jwt_decode(request.data.accessToken);
+      localStorage.setItem("doctorId", decode.sub);
       localStorage.setItem("doctorAccessTocken", request.data.accessToken);
       localStorage.setItem("doctorRefreshTocken", request.data.refreshToken);
       dispatch(authDoctorSuccess())

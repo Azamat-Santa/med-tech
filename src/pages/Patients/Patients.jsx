@@ -7,11 +7,14 @@ import { getPatient } from "../../api/patient/patient";
 import { useDispatch, useSelector } from "react-redux";
 import { moment } from "moment";
 import Spinner from './../../component/Spin/Spinner';
+import AuthButton from "../../component/AuthButton/AuthButton";
+import NewPatientForm from "../../component/newPatientForm/NewPatientForm";
 export default function Patients() {
   const listStatus = ["Все", "В ожидании", "Родившие"];
   const [status, setStatus] = useState("Статус");
   const [statusActive, setStatusActive] = useState(false);
   const [activeStatus, setActiveSatus] = useState(0);
+  const [moadalForm, setModalForm] = useState(false);
   const statusOptionIsActive = (e) => {
     e.stopPropagation();
     setStatusActive(!statusActive);
@@ -80,10 +83,15 @@ export default function Patients() {
   const search = (e)=>{
     setSearchName(e.target.value)
   }
+
   return (
     <div>
       <div className="patient-wrapper" onClick={() => setStatusActive(false)}>
         <div className="patientsFilter" onBlur={() => setStatusActive(false)}>
+         <NewPatientForm
+          moadalForm={moadalForm}
+          setModalForm={setModalForm}
+         />
           <div
             className="status-select"
             onClick={(e) => statusOptionIsActive(e)}
@@ -109,6 +117,7 @@ export default function Patients() {
                 ))}
             </div>
           </div>
+          <div onClick={()=>setModalForm(true)} className='calendar-navigate_right'>+ Создать пациента</div>
           <div>
             <input
               type="text"

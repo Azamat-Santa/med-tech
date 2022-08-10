@@ -2,6 +2,7 @@
 .patientsFilter{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 15px 0;
 }
 
@@ -107,3 +108,54 @@ width: 300px;
     height: 200px;
     border:1px solid #DEDEDE;
 }
+/* modal  */
+.patient-add-modal__content{
+   width: 430px;
+   background: white;
+   border-radius: 20px;
+}
+.patient-add-modal__header{
+    background: rgba(241, 241, 241, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    position: relative;
+    color: #5AC3E1;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.patient-add-modal__header img{
+position: absolute;
+top: 17px;
+right: 10px;
+cursor: pointer;
+}
+.patient-add-modal__content input{
+    border: 1px solid rgba(217, 217, 217, 1);
+    padding: 5px;
+    width: 100%;
+}
+.patient-add__form{
+    padding: 30px 30px;
+}
+.patient-add__item{
+    margin-bottom: 10px;
+}
+.patient-add-modal__none{
+    display: none;
+}
+.patient-add__form button{
+    width: 100%;
+    padding: 10px;
+    background: #68C3DB;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    font-size: 18px;
+    margin-top: 10px;
+    transition: .5s;
+    cursor: pointer;
+}
+ 

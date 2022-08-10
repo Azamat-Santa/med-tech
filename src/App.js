@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useEffect } from "react";
 import Calendar from "./component/Calendar/Calendar";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Authorization from "./pages/Authorization/Authorization";
 import PasswordRecovery from "./pages/PasswordRecovery/PasswordRecovery";
 import Home from "./pages/Home/Home";
@@ -52,6 +52,10 @@ function App() {
             <Route exact path="/statistics" element={<Statistics />} />
             <Route exact path="/patients" element={<Patients />} />
             <Route exact path="/patientProfile/:patientId" element={<PatientProfile />} />
+            <Route
+              path="*"
+              element={<Authorization />}  
+            />
           </Routes>
         </div>
         :
@@ -62,6 +66,10 @@ function App() {
             path="/passwordRecovery"
             element={<PasswordRecovery />}
           />
+          <Route
+              path="*"
+              element={<Authorization />}  
+            />
         </Routes>
     }  
     </div>

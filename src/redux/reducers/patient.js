@@ -16,6 +16,11 @@ export const patient = createSlice({
       isLoading: false,
       isError: "",
     },
+    newPatientregister: {
+      data: {},
+      isLoading: false,
+      isError: "",
+    },
   },
   reducers: {
     getPatientRequest(state) {
@@ -46,9 +51,29 @@ export const patient = createSlice({
     getPatientIdFailure(state, action) {
       state.patientId.isError = action.payload;
     },
+    postNewPatientRequest(state, action){
+      state.newPatientregister.isLoading = true;
+    },
+    postNewPatientSuccess(state, action){
+      state.newPatientregister.isLoading = false;
+      state.newPatientregister.isError = action.payload;
+      state.newPatientregister.data = action.payload;
+      
+    },
+    postNewPatientFailure(state, action){
+      state.newPatientregister.isError = action.payload;
+      state.patientId.isLoading = false;
+    },
   },
 });
 
 export default patient.reducer;
-export const { getPatientRequest, getPatientSuccess, getPatientFailure,getPatientIdRequest, getPatientIdSuccess,getPatientIdFailure} =
+export const { 
+  getPatientRequest, getPatientSuccess, 
+  getPatientFailure,getPatientIdRequest, 
+  getPatientIdSuccess,getPatientIdFailure, 
+  postNewPatientRequest,postNewPatientSuccess,
+  postNewPatientFailure
+
+} =
   patient.actions;

@@ -7,7 +7,12 @@ export const checkList = createSlice({
         data: [],
         isLoading: false,
         isError: "",
-    }
+    },
+    postCheckList:{
+      data: [],
+      isLoading: false,
+      isError: "",
+  }
   },
   reducers: {
     getCheckListRequest(state) {
@@ -21,10 +26,24 @@ export const checkList = createSlice({
     },
     getCheckListFailure(state, action) {
       state.getCheckList.isError = action.payload;
+    },
+
+    postCheckListRequest(state) {
+      state.postCheckList.isLoading = true;
+    },
+    postCheckListSuccess(state, action) {
+      state.postCheckList.isError = "";
+      state.postCheckList.isLoading = false;
+      state.postCheckList.data = action.payload;
+
+    },
+    postCheckListFailure(state, action) {
+      state.postCheckList.isError = action.payload;
     }
   },
 });
 
 export default checkList.reducer;
-export const { getCheckListRequest, getCheckListSuccess, getCheckListFailure} =
+export const { getCheckListRequest, getCheckListSuccess, getCheckListFailure,
+  postCheckListRequest,postCheckListSuccess,postCheckListFailure} =
 checkList.actions;

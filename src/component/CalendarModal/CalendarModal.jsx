@@ -84,7 +84,6 @@ export default function CalendarModal({ show = {}, setShow }) {
     setActivePatientList(false)
   }
   const createNewAppoinment = async () => {
-    
     const doctorId = localStorage.getItem("doctorId");
     startTimePost = moment(date  + " " + selectDate.startTime).format("X");
     endTimePost = moment(date + " " + selectDate.endTime).format("X");
@@ -99,7 +98,7 @@ export default function CalendarModal({ show = {}, setShow }) {
       modal:false
     })
     await getAppointmentAll(dispatch);
-    
+    setSearchName('')
   };
   const daysMap = [...Array(42)].map(() => day.add(1, "day").clone());
  

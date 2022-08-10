@@ -12,6 +12,7 @@ import { getPatientId } from "../../api/patient/patient";
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { getCheckListId } from "../../api/checkList/checkList";
+import { postCheckList } from './../../api/checkList/checkList';
 export default function PatientProfile() {
   const [isChecked, setChecked] = React.useState(false);
   const [activeMonth, setActiveMonth] = useState(0);
@@ -35,6 +36,12 @@ const dispatch = useDispatch()
   const patientProfileDate = useSelector(state=>state.patient.patientId.data)
   console.log(patientId);
   console.log(patientProfileDate);
+  useEffect(() => {
+    postCheckList(dispatch)
+  }, [])
+  useEffect(() => {
+    getCheckListId(dispatch)
+  }, [])
   
   
   const toggleCheck = (e) => {
