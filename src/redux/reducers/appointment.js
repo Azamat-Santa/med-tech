@@ -8,9 +8,10 @@ import { createSlice } from '@reduxjs/toolkit';
     isLoading:false,
     isError:'',
     isErrorPost:'',
-    isLoadingPost:'',
+    isLoadingPost:false,
     responsePost:''
  },
+ 
  reducers:{
     getAppoinmentRequest(state ){
         state.isLoading = true
@@ -23,9 +24,24 @@ import { createSlice } from '@reduxjs/toolkit';
     },
     getAppoinmentFailure(state,action){
         state.isError=action.payload
-    }
+    },
+    postAppoinmentRequest(state ){
+      state.isLoadingPost = true
+   },
+  postAppoinmentSuccess(state ,action){
+     state.isErrorPost=''
+     state.isLoadingPost = false
+     state.responsePost =  action.payload
+ 
+  },
+  postAppoinmentFailure(state,action){
+      state.isErrorPost=action.payload
+      state.isLoadingPost=false
+
+  }
  }
 })
 
 export default appoinment.reducer
-export const {getAppoinmentRequest, getAppoinmentSuccess,getAppoinmentFailure} = appoinment.actions
+export const {getAppoinmentRequest, getAppoinmentSuccess,getAppoinmentFailure,
+   postAppoinmentRequest,postAppoinmentSuccess,postAppoinmentFailure} = appoinment.actions

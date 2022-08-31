@@ -58,7 +58,7 @@ display: flex;
 justify-content: space-between;
 }
 .med-file__block__one__right{
-
+    width: 30%;
 }
 
 .med-file__block__one__item__two{
@@ -184,6 +184,9 @@ display: flex;
 align-items: center;
 justify-content: center;
 }
+.med-file__pregnancy__table{
+    margin-bottom: 40px;
+}
 .med-file__pregnancy__table__title{
     border: 1px solid rgba(169, 169, 169, 1);
 }
@@ -259,12 +262,12 @@ align-items: center;
 
 .med-file__block__first-examination{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 4fr 8fr;
 }
 .med-file__block__first-examination div{
 display: flex;
 align-items: center;
-width: 50%;
+width: 90%;
 }
 .med-file__block__first-examination p{
     width: 70%;
@@ -276,4 +279,52 @@ width: 50%;
 }
 .med-file__block__IMT__border{
     border-bottom: 1px solid #000;
+}
+.med-file__block__right__flex-direction{
+    display: flex;
+    flex-direction: column;
+}
+.med-file-input-two-wrapper{
+    width: 50%;
+}
+.radio-item__wrapper{
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+.radio-item__wrapper input{
+    margin-right: 5px;
+}
+
+.radio__wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.radio__wrapper__edu{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: start;
+}
+.radio__wrapper__direction{
+    display: flex;
+    flex-direction: column;
+}
+.checkbox__wrapper{
+    display: flex;
+margin-bottom: 10px;
+}
+.checkbox__wrapper input{
+    margin-right: 15px;
+}
+.med-file__block__right__another{
+    margin: 10px 0px;
+}
+.med-file__submit__wrapper{
+    display: flex;
+    justify-content: end;
+}
+.med-file__submit{
+    width: 250px;
 }

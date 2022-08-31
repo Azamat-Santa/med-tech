@@ -17,14 +17,14 @@
 }
 
 .navigate__img_left {
-    margin-right: 15px;
+   
     cursor: pointer;
-    cursor: pointer;
+    
 }
 
 .navigate__img_right {
     transform: rotate(180deg);
-    margin-left: 16px;
+
     cursor: pointer;
 }
 
@@ -34,6 +34,7 @@
     overflow: hidden;
     margin-bottom: 10px;
     width: 156px;
+    display: none;
 }
 
 .calendar-navigate_right-wrapper div {
@@ -110,7 +111,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+width: 10%;
 }
 
 .calendar-day__item_edit {
@@ -237,4 +238,17 @@ color:white;
 }
 .mini-calendar__none{
     display: none;
+}
+.calendar-navigate__month__handler{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.calendar-navigate__month__handler img{
+    display: block;
+}
+.patients-modal__not__appintments{
+    font-size: 25px;
+    font-weight: 600;
 }

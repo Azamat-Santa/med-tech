@@ -1,6 +1,5 @@
 import { getPatientFailure, getPatientIdFailure, getPatientIdRequest, getPatientIdSuccess, getPatientRequest, getPatientSuccess, postNewPatientFailure, postNewPatientRequest, postNewPatientSuccess } from '../../redux/reducers/patient';
 import api from './../../axiosSettings/index';
-import Authorization from './../../pages/Authorization/Authorization';
 
 
 export const Patient = {
@@ -11,7 +10,6 @@ export const Patient = {
       return api.get(`/patient/${id}`);
     },
     postNewPatient: async (patient) => {
-      console.log('post',patient);
       return api.post('/patient', patient);
     },
 
@@ -37,20 +35,25 @@ export const getPatientId = async (dispatch, patientId) => {
   }
 };
 export const postNewPatient = async (dispatch, patient) => {
+ try {
   const newPatient = {
-    firstName: patient.fullName,
-    lastName: patient.fullName,
+    firstName: patient.firstName,
+    lastName: patient.lastName,
     birthdayDate:patient.dateOfBirth,
     email: patient.email,
     phone: patient.phoneNumber,
     weekOfPregnancy: patient.gestationalAge,
-    password: patient.password
+    password: patient.password,
+    // doctor:'676bc38d-c9f9-4fbd-a80f-f1c4dfbbc85d'
   }
-  try {
+
     dispatch(postNewPatientRequest());
     const request = await Patient.postNewPatient(newPatient);
-    dispatch(postNewPatientSuccess()(request.data))
-  } catch (error) {
-    dispatch(postNewPatientFailure()(error));
-  }
+    dispatch(postNewPatientSuccess(request.data))
+ } catch (error) {
+    dispatch(postNewPatientFailure(error))
+  
+ }
+ 
+  
 };

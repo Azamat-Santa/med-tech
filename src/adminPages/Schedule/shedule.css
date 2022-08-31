@@ -1,0 +1,147 @@
+.table__doctors__line {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+width: 96%;
+}
+
+.table__doctors__wrapper {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.table__doctors__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.table__doctors__item img {
+    width: 25px;
+    height: 25px;
+}
+
+.table__doctors__item__patient {
+    background: linear-gradient(0deg, #CAE8F4, #CAE8F4),
+        linear-gradient(0deg, #E0E0E0, #E0E0E0);
+    margin: 10px 30px;
+    border-radius: 4px;
+    display: block;
+
+}
+.table__doctors__line__wrapper{
+    display: flex;
+}
+.table__doctors__line__wrapper__time{
+    width: 4%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #C4C4C4;
+    padding-right: 10px;
+}
+.table__doctors__line{
+    margin-bottom: 20px;
+}
+.table__doctors__line__patient{
+    margin-bottom: 0 !important;
+    padding-left: 2px;
+}
+.table__doctors__item__patient__time{
+    color: #626262;
+    font-size: 14px;
+    padding-left: 4px;
+}
+.table__doctors__item__patient__name{
+    font-weight: 400;
+    font-size: 16px;
+    padding-left: 4px;
+}
+.table__doctors__item__patient__phone{
+    font-size: 14px;
+    padding-left: 4px;
+}
+.table__doctors__item__none{
+   background: white;
+}
+.table__doctors__navigate{
+    width: 100%;
+ display: grid;
+ grid-template-columns: 3fr 6fr 3fr;
+margin-top: 20px;
+align-items: center;
+margin-bottom: 30px;
+
+}
+.table__doctors__navigate div{
+    display: flex;
+    align-items: center;
+}
+.table__doctors__navigate__left{
+    color: #5AC3E1;
+    font-weight: 700;
+    font-size: 20px;
+    justify-content: start;
+}
+.table__doctors__navigate__middle{
+    justify-content: center;
+}
+.table__doctors__navigate__right{
+    justify-content: end;
+    cursor: pointer;
+    margin-right: 40px;
+
+}
+.table__doctors__navigate__right img{
+    margin-right: 10px;
+}
+.table__doctors__btn__wrapper{
+display: flex;
+align-items: center;
+justify-content: end;
+padding-right: 30px;
+padding-bottom: 40px;
+}
+.download-button{
+    cursor: pointer;
+    width: 170px;
+}
+.doctor-add-modal__content{
+
+}
+.react-datepicker button{
+width: 10px;
+height: 10px;
+background: #68C3DB;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.react-datepicker__navigation-icon--previous {
+    right: 1px;
+}
+.react-datepicker__navigation-icon {
+    position: relative;
+    top: 4px;
+  
+    font-size: 20px;
+    width: 0;
+}
+.react-datepicker__navigation-icon--next::before {
+    transform: rotate(45deg);
+    left: -4px;
+}
+
+.add-doctor-btn{
+    width: 100%;
+    padding: 10px;
+    background: #68C3DB;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    font-size: 18px;
+    margin-top: 10px;
+    transition: .5s;
+    cursor: pointer;
+}

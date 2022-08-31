@@ -13,7 +13,6 @@ export default function Calendar({daysMap,today, isCurrentDay, appoinment, isSel
     modal:false,
     date:moment()
   })
-  const isLoading  = useSelector(state => state.appoinment.isLoading)
   const closeModalPatientList =()=>setModalPatientList({
     modal:false,
     date:moment()
@@ -30,7 +29,7 @@ export default function Calendar({daysMap,today, isCurrentDay, appoinment, isSel
         <div className="calendar-month__day_wrapper">
           {[...Array(7)].map((_, i) => {
             return (
-              <div className="calendar-month__days-week" key={i}>
+              <div className="calendar-month__days-week" key={'month'+i}>
                 {moment()
                   .day(i + 1)
                   .locale("ru")
@@ -40,13 +39,10 @@ export default function Calendar({daysMap,today, isCurrentDay, appoinment, isSel
           })}
         </div>
         <div className={true ? 'calendar-month_grid calendar-month_grid__loading' : "calendar-month_grid"} >
-        {isLoading && <div className="calendar-month_grid__wrapper">
-            <Spinner size='44px'/>
-        </div>
-        }
-          {daysMap.map((day) => {
+       
+          {daysMap.map((day,idx) => {
             return (
-              <>
+              <div key={'day'+idx}>
                 {isCurrentDay(day) ? (
                   <div className="calendar-month__day calendar-month__current-day"
                   onClick={() => {
@@ -57,6 +53,7 @@ export default function Calendar({daysMap,today, isCurrentDay, appoinment, isSel
                           date:day
                         })
                       }}
+                      
                   >
                     {day.format("D")}
                     {appoinment
@@ -99,7 +96,7 @@ export default function Calendar({daysMap,today, isCurrentDay, appoinment, isSel
                    
                   </div>
                 )}
-              </>
+              </div>
             );
           })
           }

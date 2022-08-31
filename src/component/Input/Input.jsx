@@ -1,6 +1,12 @@
 import React from 'react'
 import './input.css'
-export default function Input({id,value, placeholder, type, typeClass,name,onChange,onBlur}) {
+
+const inputTypes = {
+  editType: 'edit-user-input',
+  createType: 'create-user-input'
+}
+
+export default function Input({id,value, placeholder, type, typeClass = 'editType',name,onChange,onBlur}) {
   return (
     <div >
       <input 
@@ -9,10 +15,12 @@ export default function Input({id,value, placeholder, type, typeClass,name,onCha
       placeholder={placeholder}
       value={value}
       className={typeClass ==='editUserInput' ? 'authInput edit-user-input': 'authInput'}
+      // className={`authInput ${inputTypes[typeClass]}`}
       name={name}
       onChange={onChange}
       onBlur={onBlur}
       />
+      
     </div>
   )
 }

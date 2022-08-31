@@ -31,10 +31,7 @@ export const patient = createSlice({
       state.patientAll.isLoading = false;
       state.patientAll.data = action.payload;
       state.patientAll.pending = filterPatient(action.payload, "pending");
-      state.patientAll.whoGaveBirth = filterPatient(
-        action.payload,
-        "whoGaveBirth"
-      );
+      state.patientAll.whoGaveBirth = filterPatient(action.payload,"whoGaveBirth");
     },
     getPatientFailure(state, action) {
       state.patientAll.isError = action.payload;
@@ -58,11 +55,10 @@ export const patient = createSlice({
       state.newPatientregister.isLoading = false;
       state.newPatientregister.isError = action.payload;
       state.newPatientregister.data = action.payload;
-      
     },
     postNewPatientFailure(state, action){
+      state.newPatientregister.isLoading = false;
       state.newPatientregister.isError = action.payload;
-      state.patientId.isLoading = false;
     },
   },
 });
@@ -74,6 +70,4 @@ export const {
   getPatientIdSuccess,getPatientIdFailure, 
   postNewPatientRequest,postNewPatientSuccess,
   postNewPatientFailure
-
-} =
-  patient.actions;
+} = patient.actions;

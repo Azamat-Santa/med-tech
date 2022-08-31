@@ -4,7 +4,7 @@ export const checkList = createSlice({
   name: "checkList",
   initialState: {
     getCheckList:{
-        data: [],
+        data: {},
         isLoading: false,
         isError: "",
     },
@@ -25,7 +25,10 @@ export const checkList = createSlice({
 
     },
     getCheckListFailure(state, action) {
+      state.getCheckList.isLoading = false;
       state.getCheckList.isError = action.payload;
+      state.getCheckList.data = {};
+      console.log(action.payload);
     },
 
     postCheckListRequest(state) {

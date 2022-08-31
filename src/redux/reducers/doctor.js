@@ -19,6 +19,7 @@ import { createSlice } from '@reduxjs/toolkit';
     
     },
     authDoctorFailure(state,action){
+        state.isLoading = false
         state.isError=action.payload
     },
     authCheckDoctorRequest(state){
@@ -31,10 +32,14 @@ import { createSlice } from '@reduxjs/toolkit';
     },
     authCheckDoctorFailer(state, action){
       state.isError = action.payload
+    },
+    authLogOut(state, action){
+      state.isAuth = false
     }
+
  }
 })
 
 export default doctorSlice.reducer
 export const {authDoctorRequest, authDoctorSuccess,authDoctorFailure,
-   authCheckDoctorRequest,authCheckDoctorSuccess,authCheckDoctorFailer} = doctorSlice.actions
+   authCheckDoctorRequest,authCheckDoctorSuccess,authCheckDoctorFailer,authLogOut} = doctorSlice.actions

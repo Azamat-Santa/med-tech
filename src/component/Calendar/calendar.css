@@ -1,16 +1,18 @@
-.calendar-month{
+.calendar-month {
     background: white;
     width: 100%;
-    border-radius:20px;
+    border-radius: 20px;
 }
-.calendar-month_grid{
+
+.calendar-month_grid {
     display: grid;
-    grid-template-columns: repeat(7,1fr);
+    grid-template-columns: repeat(7, 1fr);
     grid-gap: 0.9px;
     background: #E0E0E0;
     border: 1px solid #E0E0E0;
 }
-.calendar-month_header{
+
+.calendar-month_header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -19,13 +21,14 @@
 }
 
 
-.calendar-month__day{
+.calendar-month__day {
     /* display: flex;
     flex-direction: column; */
 }
+
 .calendar-month__notCurent-month,
 .calendar-month__day,
-.calendar-month__current-day{
+.calendar-month__current-day {
     /* display: flex;
     align-items: center;
     justify-content: center; */
@@ -34,85 +37,111 @@
     cursor: pointer;
     font-size: 20px;
     height: 78px;
-   
+
     background: white;
 }
-.calendar-month__current-day{
+
+.calendar-month__current-day {
     background: #CAE8F4;
 
 }
-.calendar-month__day_wrapper{
+
+.calendar-month__day_wrapper {
     display: flex;
     width: 100%;
     color: #5AC3E1;
     font-weight: 600;
-font-size: 23px;
-justify-content: space-around;
-margin: 20px 0px;
+    font-size: 23px;
+    justify-content: space-around;
+    margin: 20px 0px;
 }
-.calendar-month__notCurent-month{
-    color:rgb(165, 165, 165);
+
+.calendar-month__notCurent-month {
+    color: rgb(165, 165, 165);
 }
-.monthHandler{
+
+.monthHandler {
     transform: rotate(180deg);
 }
-.calendar-month__isEntrie{
+
+.calendar-month__isEntrie {
     width: 6px;
     height: 6px;
-    border-radius:3px;
+    border-radius: 3px;
     background: rgb(18, 81, 168);
-    margin-left:3px;
+    margin-left: 3px;
 }
-.calendar-month__month{
+
+.calendar-month__month {
     font-size: 20px;
     font-weight: 500;
-} 
-.calendar-month__days-week{
-
 }
 
+.calendar-month__days-week {}
+
 /* day patient modal  */
-.patients-modal{
+.patients-modal {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    height: 100vh;
+    width: 100vw;
     background: rgba(0, 0, 0, 0.253);
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.1s;
 }
-.patients-modal__content{
+
+.patients-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.patients-modal__content {
     width: 80%;
     background: white;
     padding: 20px;
     z-index: 2;
+    transition: .3s;
+    transform: scale(0.5);
+    border-radius: 5px;
 }
-.patients-modal__item{
+
+.patients-modal__content.active {
+    transform: scale(1);
+
+}
+
+.patients-modal__item {
     display: grid;
-    grid-template-columns: 4fr 6fr 2fr;
+    grid-template-columns: 4fr 7fr 1fr;
     background: rgba(202, 232, 244, 1);
-padding: 17px;
-font-size: 16px;
-font-weight: 500;
+    padding: 17px;
+    font-size: 16px;
+    font-weight: 500;
 }
-.patients-modal__none{
+
+.patients-modal__none {
     display: none;
 }
-.patients-modal__date{
+
+.patients-modal__date {
     font-weight: 600;
     font-size: 24px;
     text-align: center;
     margin-bottom: 15px;
 }
-.patients-modal__item__edit{
-    cursor:pointer;
+
+.patients-modal__item__edit {
+    cursor: pointer;
     color: #0086AC;
 }
 
-.calendar-month_grid__wrapper{
-    position: absolute;
+.calendar-month_grid__wrapper {
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -121,4 +150,5 @@ font-weight: 500;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 6;
 }

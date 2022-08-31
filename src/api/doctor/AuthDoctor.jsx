@@ -7,9 +7,9 @@ import {
   authCheckDoctor,
   authCheckDoctorRequest,
   authCheckDoctorSuccess,
-  authCheckDoctorFailer
+  authCheckDoctorFailer,
+  authLogOut
 } from "../../redux/reducers/doctor";
-import axios from "axios";
 import  jwt_decode  from 'jwt-decode';
 
 
@@ -33,13 +33,10 @@ export const authDoctor = async (dispatch, email, password) => {
     if (request.status === 201) {
       const decode = jwt_decode(request.data.accessToken);
       localStorage.setItem("doctorId", decode.sub);
-      localStorage.setItem("doctorAccessTocken", request.data.accessToken);
-      localStorage.setItem("doctorRefreshTocken", request.data.refreshToken);
+      localStorage.setItem("tockenAcs", request.data.accessToken);
+      localStorage.setItem("tockenRef", request.data.refreshToken);
       dispatch(authDoctorSuccess())
-      
     }
-   
-    console.log();
   } catch (error) {
     dispatch(authDoctorFailure(error));
   }
@@ -47,8 +44,8 @@ export const authDoctor = async (dispatch, email, password) => {
 
 export const checkAuthDoctor = async (dispatch) => {
   dispatch(authCheckDoctorRequest())
-  const tockenAcs = localStorage.getItem("doctorAccessTocken");
-  const tockenRef = localStorage.getItem("doctorRefreshTocken");
+  const tockenAcs = localStorage.getItem("tockenAcs");
+  const tockenRef = localStorage.getItem("tockenRef");
   try {
     const req = await fetch(
       "https://medtechteam-2.herokuapp.com/auth/refresh",
@@ -65,17 +62,24 @@ export const checkAuthDoctor = async (dispatch) => {
     );
     const res = await req.json()
     if (req.status === 201) {
-      localStorage.setItem("doctorAccessTocken", res.accessToken);
-      localStorage.setItem("doctorRefreshTocken", res.refreshToken);
-      console.log(res);
       const decode = jwt_decode(res.accessToken);
       localStorage.setItem("doctorId", decode.sub);
-      dispatch(authCheckDoctorSuccess())
-      
+      localStorage.setItem("tockenAcs", res.accessToken);
+      localStorage.setItem("tockenRef", res.refreshToken);
+      dispatch(authCheckDoctorSuccess()) 
     }
   } catch (e) {
     console.log(e);
     dispatch(authCheckDoctorFailer())
 
   } 
+};
+
+
+export const authLogout = async (dispatch) => {
+  localStorage.removeItem("doctorId");
+  localStorage.removeItem("tockenAcs");
+  localStorage.removeItem("tockenRef");
+
+  dispatch(authLogOut())
 };

@@ -1,10 +1,11 @@
 import React from "react";
 import check from "../../img/check.png";
 import { useState } from "react";
+import { useFormik } from 'formik';
 
 export default function PatientProfileTable({ data, title ,text}) {
   const [dateTable, setDateTable] = useState(data);
-  
+ 
   const toggleCheck=(id)=>{
     const newTodo=[...dateTable]
     if(newTodo[id-1].isChecked===true){

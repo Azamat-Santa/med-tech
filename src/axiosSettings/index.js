@@ -8,8 +8,8 @@ export const api = axios.create({
 })
 
 api.interceptors.request.use((config) => {
-    if(localStorage.getItem('doctorAccessTocken')){
-        const doctorTocken = localStorage.getItem('doctorAccessTocken')
+    if(localStorage.getItem('tockenAcs')){
+        const doctorTocken = localStorage.getItem('tockenAcs')
         config.headers.Authorization = `Bearer ${doctorTocken}`
     } 
     return config;

@@ -14,7 +14,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 18%;
+    margin-top: 28%;
 
 }
 
@@ -67,4 +67,28 @@ cursor: pointer;
 .validate-error{
     color: red;
     font-size: 15px;
+}
+.auth__form__role{
+    color: white;
+}
+.auth__form__role{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 100px;
+    cursor:pointer;
+}
+.auth__form__role__item{
+    padding: 3px;
+    border-bottom: 1px solid white;
+}
+.auth__form__role__item__wrapper{
+    opacity: 0;
+    transition: .3s;
+    /* transform: scaleY(.7); */
+}
+.auth__form__role__item__wrapper.active{
+    opacity: 1;
+    /* transform: scaleY(1); */
+
 }

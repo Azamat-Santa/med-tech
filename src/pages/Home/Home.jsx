@@ -78,10 +78,11 @@ export default function Home() {
       });
     }
   };
+
  
 
   return (
-    <div className="home">
+    <div>
       <CalendarModal show={show} setShow={setShow} />
       <div className="calendar">
         <div className="calendar__wrapper">
@@ -102,14 +103,15 @@ export default function Home() {
               </div>
           <div className="calendar-navigate">
             <div className="calendar-navigate-left">
-              <div>
+              <div className="calendar-navigate__month__handler">
                 <img 
                 src={handlerToday} 
                 alt="" 
                 className="navigate__img_left" 
-                  onClick={prevHandler}
+                onClick={prevHandler}
                 />
-                {calendarNavigate.month ? today.format('MMMM'):'Сегодня'}
+                <div>{calendarNavigate.month ? today.format('MMMM') : 'Сегодня'}</div>
+                
                 <img
                   src={handlerToday}
                   alt=""

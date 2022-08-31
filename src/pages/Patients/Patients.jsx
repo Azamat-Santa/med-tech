@@ -25,6 +25,7 @@ export default function Patients() {
   }, [])
   
   const [searchName, setSearchName] = useState("");
+
   const patientList = useSelector((state) => {
     if (!searchName) return state.patient.patientAll.data;
     return state.patient.patientAll.data.filter((user) => {
@@ -53,7 +54,7 @@ export default function Patients() {
   });
 
   const isLoading = useSelector(state=>state.patient.patientAll.isLoading)
- 
+
   const handlerStatus = (option, idx) => {
     setStatus(option);
     setActiveSatus(idx);
@@ -139,6 +140,7 @@ export default function Patients() {
           <div className= {patientList.length !==0  ? 'patient-table__data ' :'patient-table__data__loading'}>
             {patientDataHandler.patientList &&
               patientList.map((patient, index) => {
+                const weekBirth =  Math.ceil((36 -  patient.weekOfPregnancy) / 4)
                 const options = {
                   year: "numeric",
                   month: "numeric",
@@ -150,25 +152,28 @@ export default function Patients() {
                 );
                 const today = new Date().toLocaleString("ru", options);
                 const dateOfBirth = new Date(patient.createdAt);
-                dateOfBirth.setMonth(dateOfBirth.getMonth() + 9);
+                dateOfBirth.setMonth(dateOfBirth.getMonth() + weekBirth);
                 dateOfBirth.setDate(0);
-
                 return (
                   <div className="patient-table__data_item">
-                    <div>{index + 1}</div>
+                    <div className="patient-table__data_item__number">{index + 1}</div>
                     <Link to={'/patientProfile/' + patient.id}>
                       <div className="patient-table__data_item__name">
                         {patient.firstName} {patient.lastName}
                       </div>
                     </Link>
-                    <div>{today < dateOfBirth ? "Родившие" : "В ожидании"}</div>
-                    <div> {registerDate} </div>
+                    <div>{today < dateOfBirth ? "Родившие" : patient.weekOfPregnancy + " " + 'неделя'}</div>
+                    <div> {registerDate}  </div>
+                    {/* <div> {patient.id}  </div> */}
                     <div>{dateOfBirth.toLocaleString("ru", options)}</div>
                   </div>
                 );
               })}
             {patientDataHandler.patientPending &&
               pendingPatientList.map((patient, index) => {
+           
+                const weekBirth =  Math.ceil((36 -  patient.weekOfPregnancy) / 4)
+
                 const options = {
                   year: "numeric",
                   month: "numeric",
@@ -180,7 +185,7 @@ export default function Patients() {
                 );
                 const today = new Date().toLocaleString("ru", options);
                 const dateOfBirth = new Date(patient.createdAt);
-                dateOfBirth.setMonth(dateOfBirth.getMonth() + 9);
+                dateOfBirth.setMonth(dateOfBirth.getMonth() + weekBirth);
                 dateOfBirth.setDate(0);
 
                 return (
@@ -191,7 +196,7 @@ export default function Patients() {
                         {patient.firstName} {patient.lastName}
                       </div>
                     </Link>
-                    <div>{today < dateOfBirth ? "Родившие" : "В ожидании"}</div>
+                    <div>{today < dateOfBirth ? "Родившие" : patient.weekOfPregnancy}</div>
                     <div> {registerDate} </div>
                     <div>{dateOfBirth.toLocaleString("ru", options)}</div>
                   </div>
@@ -199,6 +204,8 @@ export default function Patients() {
               })}
             {patientDataHandler.patientWhoGaveBirth &&
                 whoGaveBirthPatientList.map((patient, index) => {
+                const weekBirth =  Math.ceil((36 -  patient.weekOfPregnancy) / 4)
+                  
                 const options = {
                   year: "numeric",
                   month: "numeric",
@@ -210,7 +217,7 @@ export default function Patients() {
                 );
                 const today = new Date().toLocaleString("ru", options);
                 const dateOfBirth = new Date(patient.createdAt);
-                dateOfBirth.setMonth(dateOfBirth.getMonth() + 9);
+                dateOfBirth.setMonth(dateOfBirth.getMonth() + weekBirth);
                 dateOfBirth.setDate(0);
 
                 return (
@@ -221,7 +228,7 @@ export default function Patients() {
                         {patient.firstName} {patient.lastName}
                       </div>
                     </Link>
-                    <div>{today < dateOfBirth ? "Родившие" : "В ожидании"}</div>
+                    <div>{today < dateOfBirth ? "Родившие" : patient.weekOfPregnancy}</div>
                     <div> {registerDate} </div>
                     <div>{dateOfBirth.toLocaleString("ru", options)}</div>
                   </div>

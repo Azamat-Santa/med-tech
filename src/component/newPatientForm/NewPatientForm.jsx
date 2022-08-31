@@ -4,7 +4,8 @@ import close from "../../img/closeModal.png";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { postNewPatient } from "../../api/patient/patient";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
+import Spinner from "../Spin/Spinner";
 export default function NewPatientForm({ moadalForm, setModalForm }) {
   const dispatch = useDispatch();
   const SignupSchema = Yup.object().shape({
@@ -18,7 +19,7 @@ export default function NewPatientForm({ moadalForm, setModalForm }) {
       .email("Некоректный email!")
       .required("Обязательное поле"),
   });
-
+const postFormLoading = useSelector(state=>state.patient.newPatientregister.isLoading)
   const formik = useFormik({
     initialValues: {
       firstName:"",
@@ -31,7 +32,6 @@ export default function NewPatientForm({ moadalForm, setModalForm }) {
     },
     validationSchema: SignupSchema,
     onSubmit: (patient) => {
-      console.log(patient);
       postNewPatient(dispatch, patient);
     },
   });
@@ -40,18 +40,20 @@ export default function NewPatientForm({ moadalForm, setModalForm }) {
     <div
       className={
         moadalForm
-          ? "modal-wrapper patient-add-modal"
-          : "patient-add-modal__none"
+          ? "modal-wrapper active"
+          : "modal-wrapper"
       }
       onClick={() => setModalForm(false)}
     >
       <div
-        className="patient-add-modal__content"
+        className={moadalForm ? "patient-add-modal__content active": 'patient-add-modal__content'}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="patient-add-modal__header">
           Добавить пациента
-          <img src={close} alt="" />
+          <img src={close} alt=""
+          
+          />
         </div>
         <div className="patient-add__form">
           <form onSubmit={formik.handleSubmit}>
@@ -166,7 +168,8 @@ export default function NewPatientForm({ moadalForm, setModalForm }) {
                 )}
             </div>
             <button type="submit" formButton={true}>
-              Сохранить
+             {postFormLoading ?  <Spinner/> : 'Сохранить'}
+              
             </button>
           </form>
 
