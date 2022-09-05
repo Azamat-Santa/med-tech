@@ -19,6 +19,8 @@ input{
     outline: none;
 }
 
+/* fix  */
+
 a:active, /* активная/посещенная ссылка */
 a:hover,  /* при наведении */
 a {
