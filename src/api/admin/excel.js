@@ -10,7 +10,13 @@ import api from './../../axiosSettings/index';
  };
  
  export const getExcel = async (dispatch) => {
-   const response  = await fetch("https://medtechteam-2.herokuapp.com/excel")
+   const adminTocken = localStorage.getItem('tockenAcs') 
+   const response  = await fetch("https://medtechteam-2.herokuapp.com/excel",{
+    method:"GET",
+    headers:{
+        'Authorization':`Bearer ${adminTocken}`, 
+    }
+   })
    .then(response => {
        if ((response.ok === true) & (response.status === 200)) {
            return response.blob();
